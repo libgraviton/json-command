@@ -1,0 +1,9 @@
+#!/usr/bin/env php
+<?php
+
+$arguments = array_slice($argv, 1);
+$result = array_map(function ($argument) {
+    return ['res' => json_decode($argument)];
+}, $arguments);
+
+echo json_encode($result);

@@ -7,10 +7,19 @@
       "Xiag\\JsonCommand\\": "src/"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "Xiag\\JsonCommand\\UnitTest\\": "tests/unit/",
+      "Xiag\\JsonCommand\\FunctionalTest\\": "tests/functional/"
+    }
+  },
   "require": {
     "php": ">=5.4",
     "symfony/process": ">=2.6",
     "jms/serializer": ">=1.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "*"
   },
   "minimum-stability": "stable"
 }
