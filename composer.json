@@ -1,0 +1,16 @@
+{
+  "name": "xiag/json-command",
+  "keywords": ["json", "shell", "command", "executor"],
+  "license": "GPL-2.0",
+  "autoload": {
+    "psr-4": {
+      "Xiag\\JsonCommand\\": "src/"
+    }
+  },
+  "require": {
+    "php": ">=5.4",
+    "symfony/process": ">=2.6",
+    "jms/serializer": ">=1.0"
+  },
+  "minimum-stability": "stable"
+}
