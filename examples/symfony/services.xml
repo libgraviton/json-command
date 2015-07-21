@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="xiag.json_command.jsonexecutor.class">Xiag\JsonCommand\Executor\JsonCommandExecutor</parameter>
+
+        <parameter key="json_calculator.first.class">Xiag\JsonCommand\Examples\Symfony\FirstCalculator</parameter>
+        <parameter key="json_calculator.first.executable">node</parameter>
+        <parameter key="json_calculator.first.script">calculator1.js</parameter>
+        <parameter key="json_calculator.first.result">Xiag\JsonCommand\Examples\Symfony\FirstCalculatorResult</parameter>
+
+        <parameter key="json_calculator.second.class">Xiag\JsonCommand\Examples\Symfony\SecondCalculator</parameter>
+        <parameter key="json_calculator.second.executable">php</parameter>
+        <parameter key="json_calculator.second.script">calculator2.php</parameter>
+        <parameter key="json_calculator.second.result">Xiag\JsonCommand\Examples\Symfony\SecondCalculatorResult</parameter>
+    </parameters>
+
+    <services>
+        <service id="json_calculator.first.executor" class="%xiag.json_command.jsonexecutor.class%">
+            <argument>%json_calculator.first.executable%</argument>
+            <argument type="service" id="jms_serializer"/>
+            <argument>%json_calculator.first.result%</argument>
+
+            <call method="addCommandPrefix">
+                <argument>%json_calculator.first.script%</argument>
+            </call>
+        </service>
+        <service id="json_calculator.first" class="%json_calculator.first.class%">
+            <argument type="service" id="json_calculator.first.executor"/>
+        </service>
+
+
+        <service id="json_calculator.second.executor" class="%xiag.json_command.jsonexecutor.class%">
+            <argument>%json_calculator.second.executable%</argument>
+            <argument type="service" id="jms_serializer"/>
+            <argument>%json_calculator.second.result%</argument>
+
+            <call method="addCommandPrefix">
+                <argument>%json_calculator.second.script%</argument>
+            </call>
+        </service>
+        <service id="json_calculator.second" class="%json_calculator.second.class%">
+            <argument type="service" id="json_calculator.second.executor"/>
+        </service>
+    </services>
+</container>
