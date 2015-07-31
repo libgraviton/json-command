@@ -11,14 +11,14 @@
         <parameter key="json_calculator.first.script">calculator1.js</parameter>
         <parameter key="json_calculator.first.result">Xiag\JsonCommand\Examples\Symfony\FirstCalculatorResult</parameter>
 
-        <parameter key="json_calculator.second.class">Xiag\JsonCommand\Examples\Symfony\SecondCalculator</parameter>
+        <parameter key="json_calculator.second.class">%xiag.json_command.jsonexecutor.class%</parameter>
         <parameter key="json_calculator.second.executable">php</parameter>
         <parameter key="json_calculator.second.script">calculator2.php</parameter>
-        <parameter key="json_calculator.second.result">Xiag\JsonCommand\Examples\Symfony\SecondCalculatorResult</parameter>
+        <parameter key="json_calculator.second.result">array</parameter>
     </parameters>
 
     <services>
-        <service id="json_calculator.first.executor" class="%xiag.json_command.jsonexecutor.class%">
+        <service id="json_calculator.first.executor" class="%xiag.json_command.jsonexecutor.class%" public="false">
             <argument>%json_calculator.first.executable%</argument>
             <argument type="service" id="jms_serializer"/>
             <argument>%json_calculator.first.result%</argument>
@@ -32,7 +32,7 @@
         </service>
 
 
-        <service id="json_calculator.second.executor" class="%xiag.json_command.jsonexecutor.class%">
+        <service id="json_calculator.second" class="%xiag.json_command.jsonexecutor.class%">
             <argument>%json_calculator.second.executable%</argument>
             <argument type="service" id="jms_serializer"/>
             <argument>%json_calculator.second.result%</argument>
@@ -40,9 +40,6 @@
             <call method="addCommandPrefix">
                 <argument>%json_calculator.second.script%</argument>
             </call>
-        </service>
-        <service id="json_calculator.second" class="%json_calculator.second.class%">
-            <argument type="service" id="json_calculator.second.executor"/>
         </service>
     </services>
 </container>

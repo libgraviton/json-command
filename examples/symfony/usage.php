@@ -34,33 +34,11 @@ class FirstCalculatorResult
 {
 }
 
-class SecondCalculator
-{
-    /**
-     * @var JsonCommandExecutor
-     */
-    private $executor;
 
-    /**
-     * @param JsonCommandExecutor $executor
-     */
-    public function __construct(JsonCommandExecutor $executor)
-    {
-        $this->executor = $executor;
-    }
+// first calculator
+$firstCalculatorResultObject = $this->container->get('json_calculator.first')
+    ->calculate(new FirstCalculatorArg('some data'));
 
-    /**
-     * @param SecondCalculatorArg[] $args
-     * @return SecondCalculatorResult
-     */
-    public function calculate(array $args)
-    {
-        return $this->executor->executeCommand($args);
-    }
-}
-class SecondCalculatorArg
-{
-}
-class SecondCalculatorResult
-{
-}
+// second calculator
+$rawArray = $this->container->get('json_calculator.second')
+    ->executeCommand('some data');
