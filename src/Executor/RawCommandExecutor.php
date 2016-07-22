@@ -20,6 +20,10 @@ class RawCommandExecutor implements ExecutorInterface
      * @var array Prefix arguments
      */
     private $prefixArguments = [];
+    /**
+     * @var array Environment variables
+     */
+    private $environmentVariables = [];
 
     /**
      * Constructor
@@ -32,7 +36,7 @@ class RawCommandExecutor implements ExecutorInterface
     }
 
     /**
-     * Add command prefix. Prefix will not serialized
+     * Add command prefix. Prefix will not be serialized
      *
      * @param string $argument
      * @return $this
@@ -40,6 +44,19 @@ class RawCommandExecutor implements ExecutorInterface
     public function addCommandPrefix($argument)
     {
         $this->prefixArguments[] = $argument;
+        return $this;
+    }
+
+    /**
+     * Add environment variable. Value will not be serialized
+     *
+     * @param string $name
+     * @param string $value
+     * @return $this
+     */
+    public function addEnvironmentVariable($name, $value)
+    {
+        $this->environmentVariables[$name] = $value;
         return $this;
     }
 
@@ -104,6 +121,7 @@ class RawCommandExecutor implements ExecutorInterface
     protected function createProcess(array $arguments)
     {
         return ProcessBuilder::create($this->processArguments($arguments))
+            ->addEnvironmentVariables($this->environmentVariables)
             ->setPrefix($this->getCommandPrefix())
             ->getProcess();
     }
