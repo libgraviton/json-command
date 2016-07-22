@@ -63,6 +63,7 @@ $serializer = SerializerBuilder::create()
 
 $executor = new JsonCommandExecutor('node', $serializer, 'array<Xiag\JsonCommand\Examples\NodeJs\Result>');
 $executor->addCommandPrefix(__DIR__.'/calculator.js');
+$executor->addEnvironmentVariable('TZ', 'UTC');
 
 /** @var Result[] $results */
 $results = $executor->executeCommand([

@@ -23,6 +23,10 @@
             <argument type="service" id="jms_serializer"/>
             <argument>%json_calculator.first.result%</argument>
 
+            <call method="addEnvironmentVariable">
+                <argument>TZ</argument>
+                <argument>UTC</argument>
+            </call>
             <call method="addCommandPrefix">
                 <argument>%json_calculator.first.script%</argument>
             </call>
