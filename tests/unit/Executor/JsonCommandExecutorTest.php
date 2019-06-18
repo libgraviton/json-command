@@ -1,24 +1,26 @@
 <?php
-namespace Xiag\JsonCommand\UnitTest\Executor;
+namespace Graviton\JsonCommand\UnitTest\Executor;
 
+use Graviton\JsonCommand\Exception\RuntimeException;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Process\Process;
 use JMS\Serializer\SerializerInterface;
 use JMS\Serializer\Exception\RuntimeException as SerializerException;
-use Xiag\JsonCommand\Executor\JsonCommandExecutor;
+use Graviton\JsonCommand\Executor\JsonCommandExecutor;
 
 /**
  * JsonCommandExecutor class test
  */
-class JsonCommandExecutorTest extends \PHPUnit_Framework_TestCase
+class JsonCommandExecutorTest extends TestCase
 {
     /**
      * @covers JsonCommandExecutor::executeCommand
-     *
-     * @expectedException \Xiag\JsonCommand\Exception\RuntimeException
-     * @expectedExceptionCode 200
      */
     public function testExecuteCommandWithErrorDeserialization()
     {
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionCode(200);
+
         $arguments = ['a', 'b'];
         $rawOutput = '{"abc": "def"}';
 
@@ -48,7 +50,7 @@ class JsonCommandExecutorTest extends \PHPUnit_Framework_TestCase
             ->willThrowException(new SerializerException());
 
         /** @var JsonCommandExecutor|\PHPUnit_Framework_MockObject_MockObject $commandExecutor */
-        $commandExecutor = $this->getMockBuilder('Xiag\\JsonCommand\\Executor\\JsonCommandExecutor')
+        $commandExecutor = $this->getMockBuilder('Graviton\\JsonCommand\\Executor\\JsonCommandExecutor')
             ->setMethods(['createProcess', 'serializeArguments'])
             ->setConstructorArgs(['php', $serializer, 'array'])
             ->getMock();
@@ -95,7 +97,7 @@ class JsonCommandExecutorTest extends \PHPUnit_Framework_TestCase
             ->willReturn(__METHOD__);
 
         /** @var JsonCommandExecutor|\PHPUnit_Framework_MockObject_MockObject $commandExecutor */
-        $commandExecutor = $this->getMockBuilder('Xiag\\JsonCommand\\Executor\\JsonCommandExecutor')
+        $commandExecutor = $this->getMockBuilder('Graviton\\JsonCommand\\Executor\\JsonCommandExecutor')
             ->setMethods(['createProcess', 'serializeArguments'])
             ->setConstructorArgs(['php', $serializer, 'array'])
             ->getMock();

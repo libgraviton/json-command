@@ -1,7 +1,7 @@
 <?php
-namespace Xiag\JsonCommand\Examples\Symfony;
+namespace Graviton\JsonCommand\Examples\Symfony;
 
-use Xiag\JsonCommand\Executor\JsonCommandExecutor;
+use Graviton\JsonCommand\Executor\JsonCommandExecutor;
 
 class FirstCalculator
 {

@@ -1,7 +1,7 @@
 <?php
-namespace Xiag\JsonCommand;
+namespace Graviton\JsonCommand;
 
-use Xiag\JsonCommand\Exception\RuntimeException;
+use Graviton\JsonCommand\Exception\RuntimeException;
 
 /**
  * Command executor interface

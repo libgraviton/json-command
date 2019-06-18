@@ -1,13 +1,15 @@
 <?php
-namespace Xiag\JsonCommand\FunctionalTest\Executor;
+namespace Graviton\JsonCommand\FunctionalTest\Executor;
 
+use Graviton\JsonCommand\Exception\RuntimeException;
 use JMS\Serializer\SerializerBuilder;
-use Xiag\JsonCommand\Executor\JsonCommandExecutor;
+use Graviton\JsonCommand\Executor\JsonCommandExecutor;
+use PHPUnit\Framework\TestCase;
 
 /**
  * JsonCommandExecutor class test
  */
-class JsonCommandExecutorTest extends \PHPUnit_Framework_TestCase
+class JsonCommandExecutorTest extends TestCase
 {
     private $execDir;
     private $serializer;
@@ -15,7 +17,7 @@ class JsonCommandExecutorTest extends \PHPUnit_Framework_TestCase
     /**
      * @inheritdoc
      */
-    protected function setUp()
+    protected function setUp() : void
     {
         $this->execDir = realpath(__DIR__ . '/../Resources/commands');
         chmod($this->execDir.'/success', 0755);
@@ -60,48 +62,45 @@ class JsonCommandExecutorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers JsonCommandExecutor::executeCommand
-     *
-     * @expectedException \Xiag\JsonCommand\Exception\RuntimeException
-     * @expectedExceptionCode 100
      */
     public function testExecuteCommandError()
     {
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionCode(100);
         $commandExecutor = new JsonCommandExecutor($this->execDir.'/error', $this->serializer, 'array');
         $commandExecutor->executeCommand();
     }
 
     /**
      * @covers JsonCommandExecutor::executeCommand
-     *
-     * @expectedException \Xiag\JsonCommand\Exception\RuntimeException
-     * @expectedExceptionCode 100
      */
     public function testExecuteCommandUnknown()
     {
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionCode(100);
         $commandExecutor = new JsonCommandExecutor($this->execDir.'/unknown', $this->serializer, 'array');
         $commandExecutor->executeCommand();
     }
 
     /**
      * @covers JsonCommandExecutor::executeCommand
-     *
-     * @expectedException \Xiag\JsonCommand\Exception\RuntimeException
-     * @expectedExceptionCode 100
      */
     public function testExecuteCommandNonExecutable()
     {
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionCode(100);
         $commandExecutor = new JsonCommandExecutor($this->execDir.'/nonexecutable', $this->serializer, 'array');
         $commandExecutor->executeCommand();
     }
 
     /**
      * @covers JsonCommandExecutor::executeCommand
-     *
-     * @expectedException \Xiag\JsonCommand\Exception\RuntimeException
-     * @expectedExceptionCode 200
      */
     public function testExecuteCommandInvalidJson()
     {
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionCode(200);
+
         $serializer = SerializerBuilder::create()
             ->addDefaultHandlers()
             ->addDefaultSerializationVisitors()

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <serializer>
-    <class name="Xiag\JsonCommand\Examples\NodeJs\Result">
+    <class name="Graviton\JsonCommand\Examples\NodeJs\Result">
         <property name="key" type="string"/>
         <property name="result" type="float"/>
     </class>

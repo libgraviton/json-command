@@ -8,7 +8,7 @@ Installation
 ------------
 
 ```
-composer require xiag/json-command
+composer require graviton/json-command
 ```
 
 

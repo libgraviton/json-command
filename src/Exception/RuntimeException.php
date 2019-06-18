@@ -1,5 +1,5 @@
 <?php
-namespace Xiag\JsonCommand\Exception;
+namespace Graviton\JsonCommand\Exception;
 
 /**
  * Runtime exception

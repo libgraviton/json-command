@@ -1,19 +1,21 @@
 <?php
-namespace Xiag\JsonCommand\FunctionalTest\Executor;
+namespace Graviton\JsonCommand\FunctionalTest\Executor;
 
-use Xiag\JsonCommand\Executor\RawCommandExecutor;
+use Graviton\JsonCommand\Exception\RuntimeException;
+use Graviton\JsonCommand\Executor\RawCommandExecutor;
+use PHPUnit\Framework\TestCase;
 
 /**
  * RawCommandExecutor class test
  */
-class RawCommandExecutorTest extends \PHPUnit_Framework_TestCase
+class RawCommandExecutorTest extends TestCase
 {
     private $execDir;
 
     /**
      * @inheritdoc
      */
-    protected function setUp()
+    protected function setUp() : void
     {
         $this->execDir = realpath(__DIR__ . '/../Resources/commands');
         chmod($this->execDir.'/success', 0755);
@@ -47,36 +49,33 @@ class RawCommandExecutorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers RawCommandExecutor::executeCommand
-     *
-     * @expectedException \Xiag\JsonCommand\Exception\RuntimeException
-     * @expectedExceptionCode 100
      */
     public function testExecuteCommandError()
     {
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionCode(100);
         $commandExecutor = new RawCommandExecutor($this->execDir.'/error');
         $commandExecutor->executeCommand();
     }
 
     /**
      * @covers JsonCommandExecutor::executeCommand
-     *
-     * @expectedException \Xiag\JsonCommand\Exception\RuntimeException
-     * @expectedExceptionCode 100
      */
     public function testExecuteCommandUnknown()
     {
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionCode(100);
         $commandExecutor = new RawCommandExecutor($this->execDir.'/unknown');
         $commandExecutor->executeCommand();
     }
 
     /**
      * @covers JsonCommandExecutor::executeCommand
-     *
-     * @expectedException \Xiag\JsonCommand\Exception\RuntimeException
-     * @expectedExceptionCode 100
      */
     public function testExecuteCommandNonExecutable()
     {
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionCode(100);
         $commandExecutor = new RawCommandExecutor($this->execDir.'/nonexecutable');
         $commandExecutor->executeCommand();
     }

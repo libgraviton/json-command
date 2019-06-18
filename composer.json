@@ -1,21 +1,21 @@
 {
-  "name": "xiag/json-command",
+  "name": "graviton/json-command",
   "keywords": ["json", "shell", "command", "executor"],
-  "license": "GPL-2.0",
+  "license": "MIT",
   "autoload": {
     "psr-4": {
-      "Xiag\\JsonCommand\\": "src/"
+      "Graviton\\JsonCommand\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Xiag\\JsonCommand\\UnitTest\\": "tests/unit/",
-      "Xiag\\JsonCommand\\FunctionalTest\\": "tests/functional/"
+      "Graviton\\JsonCommand\\UnitTest\\": "tests/unit/",
+      "Graviton\\JsonCommand\\FunctionalTest\\": "tests/functional/"
     }
   },
   "require": {
-    "php": ">=5.4",
-    "symfony/process": ">=2.6",
+    "php": ">=7.3",
+    "symfony/process": ">=4.3.0",
     "jms/serializer": ">=1.0"
   },
   "require-dev": {
