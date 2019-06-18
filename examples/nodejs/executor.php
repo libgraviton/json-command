@@ -1,8 +1,8 @@
 <?php
-namespace Xiag\JsonCommand\Examples\NodeJs;
+namespace Graviton\JsonCommand\Examples\NodeJs;
 
 use JMS\Serializer\SerializerBuilder;
-use Xiag\JsonCommand\Executor\JsonCommandExecutor;
+use Graviton\JsonCommand\Executor\JsonCommandExecutor;
 
 require __DIR__.'/../../vendor/autoload.php';
 
@@ -57,11 +57,11 @@ $serializer = SerializerBuilder::create()
     ->addDefaultSerializationVisitors()
     ->addDefaultDeserializationVisitors()
     ->setDebug(true)
-    ->addMetadataDir(__DIR__.'/serializer', 'Xiag\JsonCommand\Examples\NodeJs')
+    ->addMetadataDir(__DIR__.'/serializer', 'Graviton\JsonCommand\Examples\NodeJs')
     ->setCacheDir(sys_get_temp_dir())
     ->build();
 
-$executor = new JsonCommandExecutor('node', $serializer, 'array<Xiag\JsonCommand\Examples\NodeJs\Result>');
+$executor = new JsonCommandExecutor('node', $serializer, 'array<Graviton\JsonCommand\Examples\NodeJs\Result>');
 $executor->addCommandPrefix(__DIR__.'/calculator.js');
 $executor->addEnvironmentVariable('TZ', 'UTC');
 

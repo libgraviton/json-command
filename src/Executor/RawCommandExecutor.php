@@ -1,11 +1,11 @@
 <?php
-namespace Xiag\JsonCommand\Executor;
+namespace Graviton\JsonCommand\Executor;
 
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\ProcessBuilder;
-use Xiag\JsonCommand\ExecutorInterface;
-use Xiag\JsonCommand\Exception\RuntimeException;
+use Graviton\JsonCommand\ExecutorInterface;
+use Graviton\JsonCommand\Exception\RuntimeException;
 
 /**
  * Command executor
@@ -120,9 +120,13 @@ class RawCommandExecutor implements ExecutorInterface
      */
     protected function createProcess(array $arguments)
     {
-        return ProcessBuilder::create($this->processArguments($arguments))
-            ->addEnvironmentVariables($this->environmentVariables)
-            ->setPrefix($this->getCommandPrefix())
-            ->getProcess();
+        $process = new Process(
+            array_merge(
+                $this->getCommandPrefix(),
+                $this->processArguments($arguments)
+            )
+        );
+        $process->setEnv($this->environmentVariables);
+        return $process;
     }
 }

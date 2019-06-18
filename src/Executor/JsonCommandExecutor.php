@@ -1,9 +1,9 @@
 <?php
-namespace Xiag\JsonCommand\Executor;
+namespace Graviton\JsonCommand\Executor;
 
 use JMS\Serializer\SerializerInterface;
 use JMS\Serializer\Exception\Exception as SerializerException;
-use Xiag\JsonCommand\Exception\RuntimeException;
+use Graviton\JsonCommand\Exception\RuntimeException;
 
 /**
  * JSON command executor

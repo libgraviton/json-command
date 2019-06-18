@@ -1,22 +1,24 @@
 <?php
-namespace Xiag\JsonCommand\UnitTest\Executor;
+namespace Graviton\JsonCommand\UnitTest\Executor;
 
+use Graviton\JsonCommand\Exception\RuntimeException;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Process\Process;
-use Xiag\JsonCommand\Executor\RawCommandExecutor;
+use Graviton\JsonCommand\Executor\RawCommandExecutor;
 
 /**
  * RawCommandExecutor class test
  */
-class RawCommandExecutorTest extends \PHPUnit_Framework_TestCase
+class RawCommandExecutorTest extends TestCase
 {
     /**
      * @covers RawCommandExecutor::executeCommand
-     *
-     * @expectedException \Xiag\JsonCommand\Exception\RuntimeException
-     * @expectedExceptionCode 100
      */
     public function testExecuteCommandWithErrorExecuting()
     {
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionCode(100);
+
         $arguments = ['a', 'b'];
 
         /** @var Process|\PHPUnit_Framework_MockObject_MockObject $process */
@@ -30,7 +32,7 @@ class RawCommandExecutorTest extends \PHPUnit_Framework_TestCase
         $process->disableOutput();
 
         /** @var RawCommandExecutor|\PHPUnit_Framework_MockObject_MockObject $commandExecutor */
-        $commandExecutor = $this->getMockBuilder('Xiag\\JsonCommand\\Executor\\RawCommandExecutor')
+        $commandExecutor = $this->getMockBuilder('Graviton\\JsonCommand\\Executor\\RawCommandExecutor')
             ->setMethods(['createProcess'])
             ->setConstructorArgs(['php'])
             ->getMock();
@@ -65,7 +67,7 @@ class RawCommandExecutorTest extends \PHPUnit_Framework_TestCase
         $process->disableOutput();
 
         /** @var RawCommandExecutor|\PHPUnit_Framework_MockObject_MockObject $commandExecutor */
-        $commandExecutor = $this->getMockBuilder('Xiag\\JsonCommand\\Executor\\RawCommandExecutor')
+        $commandExecutor = $this->getMockBuilder('Graviton\\JsonCommand\\Executor\\RawCommandExecutor')
             ->setMethods(['createProcess', 'serializeArguments'])
             ->setConstructorArgs(['php'])
             ->getMock();
